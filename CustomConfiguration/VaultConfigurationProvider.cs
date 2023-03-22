@@ -2,17 +2,17 @@
 using VaultSharp;
 using VaultSharp.V1.AuthMethods.Token;
 
-namespace AspNetCoreVaultIntegration
+namespace AspNetCoreVaultIntegration.CustomConfiguration
 {
-    public class VaultConfigurationProvider: ConfigurationProvider
+    public class VaultConfigurationProvider : ConfigurationProvider
     {
         private readonly VaultOptions _vaultOptions;
         private readonly IVaultClient _vaultClient;
-        
+
         public VaultConfigurationProvider(VaultOptions vaultOptions)
         {
             _vaultOptions = vaultOptions;
-            var vaultClientSettings = new VaultClientSettings(_vaultOptions.Address, 
+            var vaultClientSettings = new VaultClientSettings(_vaultOptions.Address,
                 new TokenAuthMethodInfo(vaultOptions.Token));
             _vaultClient = new VaultClient(vaultClientSettings);
         }
@@ -25,7 +25,7 @@ namespace AspNetCoreVaultIntegration
         {
             var data = await ReadSettings(_vaultClient, _vaultOptions);
             var dict = new JsonParser().Parse(JObject.FromObject(data));
-            foreach(var j in dict)
+            foreach (var j in dict)
             {
                 Data.Add(j);
             }

@@ -1,4 +1,4 @@
-﻿namespace AspNetCoreVaultIntegration
+﻿namespace AspNetCoreVaultIntegration.CustomConfiguration
 {
     public class VaultConfigurationSource : IConfigurationSource
     {
